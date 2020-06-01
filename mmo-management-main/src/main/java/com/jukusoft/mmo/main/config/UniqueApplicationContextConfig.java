@@ -38,10 +38,10 @@ public class UniqueApplicationContextConfig implements ApplicationContextAware {
     }
 
     /**
-    * see also: https://stackoverflow.com/questions/30431776/using-scheduled-and-enablescheduling-but-gives-nosuchbeandefinitionexception/48861718
-     *
+     * see also: https://stackoverflow.com/questions/30431776/using-scheduled-and-enablescheduling-but-gives-nosuchbeandefinitionexception/48861718
+     * <p>
      * https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/scheduling.html
-    */
+     */
     @Bean
     public TaskScheduler taskScheduler() {
         return new ConcurrentTaskScheduler();
