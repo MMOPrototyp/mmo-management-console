@@ -9,6 +9,7 @@
         <module>mmo-management-service</module>
         <module>mmo-management-rest</module>
         <module>mmo-management-main</module>
+        <module>mmo-management-core</module>
     </modules>
 
     <parent>
