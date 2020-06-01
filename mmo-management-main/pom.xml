@@ -11,5 +11,38 @@
 
     <artifactId>mmo-management-main</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-data</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-rest</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Java JWT for REST authentification -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
