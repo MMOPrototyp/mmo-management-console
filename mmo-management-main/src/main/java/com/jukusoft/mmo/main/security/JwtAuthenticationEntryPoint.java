@@ -24,18 +24,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Ac
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
-
-        /*try {
-            response.setContentType("application/json");
-            response.getOutputStream()
-                    .println(new GsonBuilder()
-                            .setPrettyPrinting()
-                            .create()
-                            .toJson(HttpServletResponse.SC_FORBIDDEN));
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        } finally {
-            response.getOutputStream().close();
-        }*/
     }
 
 }
