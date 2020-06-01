@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class JWTExceptionHandlerController {
 
     @ExceptionHandler({MalformedJwtException.class, SignatureException.class})
-    public ResponseEntity handleMalformedJWTTokenException(MalformedJwtException ex) {
+    public ResponseEntity<String> handleMalformedJWTTokenException(MalformedJwtException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({ExpiredJwtException.class})
-    public ResponseEntity handleExpiredJWTTokenException(ExpiredJwtException ex) {
+    public ResponseEntity<String> handleExpiredJWTTokenException(ExpiredJwtException ex) {
         return new ResponseEntity<>("jwt token expired", HttpStatus.UNAUTHORIZED);
     }
 
