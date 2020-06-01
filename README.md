@@ -2,6 +2,11 @@
 
 Management Console for MMO Prototyp, written in Java
 
+Branch|Status
+---|---
+master|[![Build Status](https://travis-ci.org/MMOPrototyp/mmo-management-console.svg?branch=master)](https://travis-ci.org/MMOPrototyp/mmo-management-console)
+develop|[![Build Status](https://travis-ci.org/MMOPrototyp/mmo-management-console.svg?branch=develop)](https://travis-ci.org/MMOPrototyp/mmo-management-console)
+
 [![Build Status](https://travis-ci.org/MMOPrototyp/mmo-management-console.svg?branch=master)](https://travis-ci.org/MMOPrototyp/mmo-management-console)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com.jukusoft%3Ammo-management-console&metric=ncloc)](https://sonarcloud.io/dashboard/index/com.jukusoft%3Ammo-management-console) 
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.jukusoft%3Ammo-management-console&metric=alert_status)](https://sonarcloud.io/dashboard/index/com.jukusoft%3Ammo-management-console) 
