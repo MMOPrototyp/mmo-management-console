@@ -6,6 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mmo-management-data</module>
+        <module>mmo-management-service</module>
     </modules>
 
     <parent>
