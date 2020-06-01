@@ -10,6 +10,7 @@
         <module>mmo-management-rest</module>
         <module>mmo-management-main</module>
         <module>mmo-management-core</module>
+        <module>mmo-management-auth</module>
     </modules>
 
     <parent>
