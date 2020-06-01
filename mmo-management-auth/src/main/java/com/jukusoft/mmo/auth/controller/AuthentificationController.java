@@ -25,7 +25,7 @@ public class AuthentificationController {
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity createCustomer(@RequestBody AuthentificationRequest request) {
+    public ResponseEntity<JWTTokenResponse> createCustomer(@RequestBody AuthentificationRequest request) {
         JWTTokenResponse tokenRes = authenticationService.generateJWTToken(request.getUsername(), request.getPassword());
         logger.info("create new token for user {}", request.getUsername());
 
@@ -33,7 +33,7 @@ public class AuthentificationController {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity handleUserNotFoundException(UserNotFoundException ex) {
+    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
