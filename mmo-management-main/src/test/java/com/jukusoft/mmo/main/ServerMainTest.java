@@ -1,4 +1,4 @@
-package com.jukusoft.mmo.management.console;
+package com.jukusoft.mmo.main;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.jukusoft.mmo.management.console;
+package com.jukusoft.mmo.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,11 +7,11 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication(scanBasePackages = {"com.jukusoft.management.console"})
+@SpringBootApplication(scanBasePackages = {"com.jukusoft.mmo"})
 @EnableCaching
 @EnableScheduling
-@EntityScan("com.jukusoft.management.console")
-@EnableJpaRepositories("com.jukusoft.management.console")
+@EntityScan("com.jukusoft.mmo")
+@EnableJpaRepositories("com.jukusoft.mmo")
 public class ServerMain {
 
     public static void main(String[] args) {
