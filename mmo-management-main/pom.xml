@@ -11,6 +11,12 @@
 
     <artifactId>mmo-management-main</artifactId>
 
+    <properties>
+        <!-- version information -->
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+        <versionName>${project.version} (${maven.build.timestamp})</versionName>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.jukusoft</groupId>
@@ -43,6 +49,61 @@
             <version>${jjwt.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.jukusoft.mmo.main.ServerMain</mainClass>
+                    <addResources>false</addResources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build-info</goal>
+                        </goals>
+                        <configuration>
+                            <additionalProperties>
+                                <encoding.source>UTF-8</encoding.source>
+                                <encoding.reporting>UTF-8</encoding.reporting>
+                                <java.source>${maven.compiler.source}</java.source>
+                                <java.target>${maven.compiler.target}</java.target>
+
+                                <!-- additional values -->
+                                <version>${project.version}</version>
+                                <versionName>${versionName}</versionName>
+                                <build.number>${buildNumber}</build.number>
+                                <build.time>${maven.build.timestamp}</build.time>
+                                <!-- <git.build.hash>${versionSCM}</git.build.hash> -->
+                            </additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+                    <doCheck>false</doCheck>
+                    <doUpdate>false</doUpdate>
+                    <revisionOnScmFailure>N/A</revisionOnScmFailure>
+                    <shortRevisionLength>7</shortRevisionLength>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
