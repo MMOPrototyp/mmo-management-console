@@ -51,7 +51,7 @@ public class SessionService {
     @Cacheable(cacheNames = "granted_authorities")
     private List<GrantedAuthority> getGrantedAuthorities(Set<String> privileges) {
         return privileges.stream()
-                .map(permission -> new SimpleGrantedAuthority(permission))
+                .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
 
