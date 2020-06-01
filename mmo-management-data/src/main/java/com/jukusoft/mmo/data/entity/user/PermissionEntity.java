@@ -4,6 +4,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * this table contains a list with all possible permissions
@@ -16,7 +17,7 @@ import javax.validation.constraints.Size;
 })
 @Cacheable//use second level cache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class PermissionEntity {
+public class PermissionEntity implements Serializable {
 
     public enum PermissionType {
         /*
