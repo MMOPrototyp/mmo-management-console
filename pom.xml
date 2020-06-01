@@ -32,6 +32,9 @@
 
         <swagger.version>2.9.2</swagger.version>
 
+        <!-- Java JWT for REST authentification -->
+        <jjwt.version>0.9.1</jjwt.version>
+
         <!-- format maven build timestamp to add to manifest -->
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
