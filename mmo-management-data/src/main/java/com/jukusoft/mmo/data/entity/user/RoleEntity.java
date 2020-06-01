@@ -1,6 +1,5 @@
 package com.jukusoft.mmo.data.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jukusoft.mmo.data.entity.AbstractEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 

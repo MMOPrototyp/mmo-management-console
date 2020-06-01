@@ -5,7 +5,6 @@ import com.jukusoft.mmo.data.entity.AbstractEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import java.util.Optional;
 
 @Entity
 @Table(name = "user_preferences", indexes = {
