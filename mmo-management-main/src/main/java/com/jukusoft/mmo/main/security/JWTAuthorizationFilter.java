@@ -73,26 +73,10 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .setSigningKey(secret)
                     .parseClaimsJws(authToken)
                     .getBody();
-            //JWT.require(/*Algorithm.HMAC512(SECRET.getBytes())*/SignatureAlgorithm.HS512)
-                    /*.build()
-                    .verify(token.replace(TOKEN_PREFIX, ""))
-                    .getSubject();*/
-
-            //validate token
-            /*boolean valide = validateToken(body);//.orElseThrow(() -> new MalformedJwtException("malformed jwt token"));
-
-            if (!valide) {
-                throw new IllegalStateException("jwt token is not valid or token has expired");
-            }*/
 
             String username = body.getSubject();
 
             return sessionService.findUser(username);
-
-            /*if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-            }
-            return null;*/
         }
 
         return null;
