@@ -8,6 +8,7 @@
         <module>mmo-management-data</module>
         <module>mmo-management-service</module>
         <module>mmo-management-rest</module>
+        <module>mmo-management-main</module>
     </modules>
 
     <parent>
