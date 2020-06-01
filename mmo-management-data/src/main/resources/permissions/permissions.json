@@ -1,0 +1,7 @@
+[
+	{
+		"token": "global.super.admin",
+		"title": "Super Admin (can do everything)",
+		"type": "global"
+	}
+]

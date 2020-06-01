@@ -11,5 +11,27 @@
 
     <artifactId>mmo-management-data</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- ini4j -->
+        <dependency>
+            <groupId>org.ini4j</groupId>
+            <artifactId>ini4j</artifactId>
+            <version>${ini4j.version}</version>
+        </dependency>
+
+        <!-- org.json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${org.json.version}</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

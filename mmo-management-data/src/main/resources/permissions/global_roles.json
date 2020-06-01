@@ -1,0 +1,9 @@
+[
+	{
+		"name": "super_admin",
+		"title": "Super Admin (can do everything)",
+		"default_permissions": [
+			"global.super.admin"
+		]
+	}
+]
