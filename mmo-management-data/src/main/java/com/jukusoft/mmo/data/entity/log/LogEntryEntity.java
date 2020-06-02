@@ -3,10 +3,7 @@ package com.jukusoft.mmo.data.entity.log;
 import com.jukusoft.mmo.data.entity.AbstractEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -30,6 +27,10 @@ public class LogEntryEntity extends AbstractEntity {
     //@NotEmpty(message = "message is required")
     private String message;
 
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "log_type", nullable = false, updatable = false)
+    private LogEntryType type;
+
     public LogEntryEntity() {
         //
     }
@@ -37,6 +38,7 @@ public class LogEntryEntity extends AbstractEntity {
     public LogEntryEntity(@Size(min = 2, max = 45) @NotEmpty(message = "title is required") String title, @Size(min = 2, max = 45) @NotEmpty(message = "message is required") String message) {
         this.title = title;
         this.message = message;
+        this.type = LogEntryType.INFO;
     }
 
     public String getTitle() {
