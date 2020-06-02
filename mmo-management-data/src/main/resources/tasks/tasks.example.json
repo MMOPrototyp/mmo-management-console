@@ -1,0 +1,8 @@
+[
+	{
+		"className": "com.example.mypackage.UpdateAccountInfoTask",
+		"title": "Update account info",
+		"description": "Update account info like money balance, account overview and so on. This task is executed every 12 hours.",
+		"interval": 720
+	}
+]
