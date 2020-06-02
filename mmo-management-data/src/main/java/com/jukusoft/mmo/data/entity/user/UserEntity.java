@@ -2,6 +2,7 @@ package com.jukusoft.mmo.data.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jukusoft.mmo.data.entity.AbstractEntity;
+import com.jukusoft.mmo.data.entity.log.LogEntryEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
@@ -47,6 +48,10 @@ public class UserEntity extends AbstractEntity {
     @Size(min = 2, max = 255)
     @Column(name = "last_ip_address", unique = false, nullable = true, updatable = true)
     private String lastIP;
+
+    @OneToMany(/*mappedBy = "customer", */cascade = {CascadeType.ALL}, orphanRemoval = true, fetch = FetchType.LAZY)
+    //@Column(name = "user_entity")
+    private List<LogEntryEntity> logs;
 
     public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username) {
         this.username = username;
