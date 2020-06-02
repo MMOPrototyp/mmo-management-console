@@ -8,5 +8,10 @@
 		"title": "Should LDAP server automatically create new users from LDAP in database?",
 		"key": "ldap.autocreate.user",
 		"value": "true"
+	},
+	{
+		"title": "Should the tutorial be enabled or skipped?",
+		"key": "tutorial.enabled",
+		"value": "true"
 	}
 ]
