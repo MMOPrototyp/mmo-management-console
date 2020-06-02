@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
- * a zone is a collection of one or more regions
+ * a zone is a collection of one or more regions.
+ * For the first attempts, the game has only one zone.
+ *
+ * Limitations:
+ * NPCs can only travels within a zone (between regions & maps), not between zones!
  */
 @Entity
 @Table(name = "game_zones", indexes = {
