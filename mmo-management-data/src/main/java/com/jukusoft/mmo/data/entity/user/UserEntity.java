@@ -44,6 +44,10 @@ public class UserEntity extends AbstractEntity {
     @ManyToMany(/*mappedBy = "id", */cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private List<RoleEntity> roles = new ArrayList<>();
 
+    @Size(min = 2, max = 255)
+    @Column(name = "last_ip_address", unique = false, nullable = true, updatable = true)
+    private String lastIP;
+
     public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username) {
         this.username = username;
     }
