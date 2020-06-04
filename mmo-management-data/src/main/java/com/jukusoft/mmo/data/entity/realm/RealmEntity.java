@@ -27,13 +27,25 @@ public class RealmEntity extends AbstractEntity {
     @NotEmpty(message = "title is required")
     private String title;
 
+    @Embedded
+    private StartPosition startPosition;
+
     public RealmEntity(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name, @Size(min = 2, max = 45) @NotEmpty(message = "title is required") String title) {
         this.name = name;
         this.title = title;
+        this.startPosition = new StartPosition();
     }
 
-    public RealmEntity() {
+    protected RealmEntity() {
         //
+    }
+
+    public StartPosition getStartPosition() {
+        return startPosition;
+    }
+
+    public void setStartPosition(StartPosition startPosition) {
+        this.startPosition = startPosition;
     }
 
 }

@@ -18,5 +18,15 @@
 		"title": "Debug Mode",
 		"key": "debug.mode.enabled",
 		"value": "true"
+	},
+	{
+		"title": "Registration enabled",
+		"key": "registration.enabled",
+		"value": "true"
+	},
+	{
+		"title": "Login enabled",
+		"key": "login.enabled",
+		"value": "true"
 	}
 ]

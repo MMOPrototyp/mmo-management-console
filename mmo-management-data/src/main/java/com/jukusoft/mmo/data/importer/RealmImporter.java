@@ -2,8 +2,11 @@ package com.jukusoft.mmo.data.importer;
 
 import com.jukusoft.mmo.core.utils.ImportUtils;
 import com.jukusoft.mmo.core.utils.ResourceUtils;
+import com.jukusoft.mmo.data.dao.MapDAO;
 import com.jukusoft.mmo.data.dao.RealmDAO;
+import com.jukusoft.mmo.data.entity.map.MapEntity;
 import com.jukusoft.mmo.data.entity.realm.RealmEntity;
+import com.jukusoft.mmo.data.entity.realm.StartPosition;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -15,7 +18,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 
+import javax.persistence.Embedded;
 import java.util.Objects;
+import java.util.Optional;
 
 @Configuration
 @Profile("default")
@@ -25,6 +30,9 @@ public class RealmImporter implements InitializingBean {
 
     @Autowired
     private RealmDAO realmDAO;
+
+    @Autowired
+    private MapDAO mapDAO;
 
     @Bean(name = "realm_import")
     @Override
@@ -46,15 +54,35 @@ public class RealmImporter implements InitializingBean {
             String name = json.getString("name");
             String title = json.getString("title");
 
+            JSONObject startPosJSON = json.getJSONObject("startPosition");
+            String startMap = startPosJSON.getString("mapUniqueName");
+            float posX = startPosJSON.getFloat("x");
+            float posY = startPosJSON.getFloat("y");
+
+            RealmEntity realm = null;
+
             //check, if realm already exists
             if (realmDAO.existsByName(name)) {
                 logger.info("skip realm '{}', because realm already exists", name);
+                realm = realmDAO.findByName(name).orElseThrow(() -> new RuntimeException("realm not found with name '" + name + "'"));
+            } else {
+                logger.info("create new realm: {}", name);
+                realm = new RealmEntity(name, title);
+            }
+
+            //find map
+            Optional<MapEntity> mapEntityOptional = mapDAO.findByName(startMap);
+
+            if (!mapEntityOptional.isPresent()) {
+                logger.error("start map from realm is not present: {}", startMap);
                 continue;
             }
 
-            logger.info("create new realm: {}", name);
+            //set start position
+            realm.getStartPosition().setStartMap(mapEntityOptional.get());
+            realm.getStartPosition().setPosX(posX);
+            realm.getStartPosition().setPosY(posY);
 
-            RealmEntity realm = new RealmEntity(name, title);
             realmDAO.save(realm);
         }
     }

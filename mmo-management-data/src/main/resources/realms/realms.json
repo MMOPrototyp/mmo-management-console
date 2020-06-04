@@ -1,10 +1,20 @@
 [
 	{
 		"name": "dev-realm",
-		"title": "test"
+		"title": "test",
+		"startPosition": {
+			"mapUniqueName": "dev-room",
+			"x": 100,
+			"y": 100
+		}
 	},
 	{
 		"name": "official-realm",
-		"title": "Official Game Server"
+		"title": "Official Game Server",
+		"startPosition": {
+			"mapUniqueName": "map1",
+			"x": 100,
+			"y": 100
+		}
 	}
 ]
