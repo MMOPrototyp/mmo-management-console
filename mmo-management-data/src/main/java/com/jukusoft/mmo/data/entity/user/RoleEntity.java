@@ -73,11 +73,13 @@ public class RoleEntity extends AbstractEntity {
     public void addPermission(PermissionEntity permissionEntity) {
         Objects.requireNonNull(permissionEntity);
 
-        if (this.permissions.contains(permissionEntity)) {
+        RolePermissionEntity rolePermission = new RolePermissionEntity(this, permissionEntity);
+
+        if (this.permissions.contains(rolePermission)) {
             return;
         }
 
-        this.permissions.add(new RolePermissionEntity(this, permissionEntity));
+        this.permissions.add(rolePermission);
     }
 
     public void removePermission(PermissionEntity permissionEntity) {

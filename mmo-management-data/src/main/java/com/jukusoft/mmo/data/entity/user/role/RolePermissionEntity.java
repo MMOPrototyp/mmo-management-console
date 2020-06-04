@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "role_permissions", indexes = {
@@ -57,6 +58,20 @@ public class RolePermissionEntity {
 
     public Date getEndsAt() {
         return endsAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RolePermissionEntity)) return false;
+        RolePermissionEntity that = (RolePermissionEntity) o;
+        return roleID.equals(that.roleID) &&
+                permissionID.equals(that.permissionID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleID, permissionID);
     }
 
 }
