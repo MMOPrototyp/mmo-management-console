@@ -1,3 +1,7 @@
 {
-	"name": "default-zone"
+	"name": "default-zone",
+	"features.enabled": {
+		"feature1": true,
+		"feature2": true
+	}
 }

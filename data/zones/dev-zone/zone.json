@@ -1,3 +1,7 @@
 {
-	"name": "dev-zone"
+	"name": "dev-zone",
+	"features.enabled": {
+		"feature1": true,
+		"feature2": true
+	}
 }

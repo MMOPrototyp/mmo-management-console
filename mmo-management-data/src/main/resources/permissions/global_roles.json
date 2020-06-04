@@ -7,5 +7,54 @@
 			"global.can.login",
 			"global.can.access.dev.room"
 		]
+	},
+	{
+		"name": "server_admin",
+		"title": "Server Admin (can monitor the server and change configuration settings)",
+		"default_permissions": [
+
+		]
+	},
+	{
+		"name": "supporter",
+		"title": "Supporter (can help players)",
+		"default_permissions": [
+
+		]
+	},
+	{
+		"name": "developer",
+		"title": "Developer (can access developer features like the dev room)",
+		"default_permissions": [
+			"global.can.access.dev.room"
+		]
+	},
+	{
+		"name": "moderator",
+		"title": "Moderator (can access chat messages and bann users)",
+		"default_permissions": [
+
+		]
+	},
+	{
+		"name": "game_master",
+		"title": "Game Master (can access every item in the game world and modify the game world)",
+		"default_permissions": [
+
+		]
+	},
+	{
+		"name": "operator",
+		"title": "Operator (like a server admin, but cannot change settings and so on, more readonly access to server admin features)",
+		"default_permissions": [
+
+		]
+	},
+	{
+		"name": "player",
+		"title": "Player",
+		"default_permissions": [
+			"global.can.login"
+		]
 	}
 ]
