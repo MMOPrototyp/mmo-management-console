@@ -1,11 +1,13 @@
 package com.jukusoft.mmo.data.entity.user;
 
 import com.jukusoft.mmo.data.entity.AbstractEntity;
+import com.jukusoft.mmo.data.entity.user.role.RolePermissionEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "roles", indexes = {
@@ -24,19 +26,30 @@ public class RoleEntity extends AbstractEntity {
     @Column(name = "name", nullable = false, updatable = true, unique = true)
     private String name;
 
-    @Size(min = 2, max = 90)
+    @Size(min = 2, max = 255)
     @Column(name = "title", nullable = false, updatable = true)
     private String title;
 
     @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
     private List<UserEntity> members = new ArrayList<>();
 
-    @ElementCollection(/* targetClass=String.class,  */fetch = FetchType.LAZY)
-    @JoinTable(name = "role_permissions",
-            joinColumns = @JoinColumn(name = "role_id"))
+    //@ManyToMany(fetch = FetchType.LAZY)
+    //@ElementCollection(/* targetClass=String.class,  */fetch = FetchType.LAZY)
+    /*@JoinTable(name = "role_permissions",
+            joinColumns = {
+                    @JoinColumn(name = "role_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "permission_id", referencedColumnName = "id")
+            },
+            uniqueConstraints = {
+                    @UniqueConstraint(columnNames = {})
+            }
+            )
     @MapKeyColumn(name = "token")
-    @Column(name = "value")
-    private Set<PermissionEntity> permissions;
+    @Column(name = "value")*/
+    @OneToMany(mappedBy = "roleID", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<RolePermissionEntity> permissions;
 
     /**
      * constructor for global role
@@ -69,12 +82,17 @@ public class RoleEntity extends AbstractEntity {
     }
 
     public Set<PermissionEntity> listPermissions() {
-        return permissions;
+        return permissions.stream().map(rolePermission -> rolePermission.getPermission()).collect(Collectors.toSet());
     }
 
     public void addPermission(PermissionEntity permissionEntity) {
         Objects.requireNonNull(permissionEntity);
-        this.permissions.add(permissionEntity);
+
+        if (this.permissions.contains(permissionEntity)) {
+            return;
+        }
+
+        this.permissions.add(new RolePermissionEntity(this, permissionEntity));
     }
 
     public void removePermission(PermissionEntity permissionEntity) {
