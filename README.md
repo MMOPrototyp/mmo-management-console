@@ -18,3 +18,9 @@ develop|[![Build Status](https://travis-ci.org/MMOPrototyp/mmo-management-consol
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.jukusoft%3Ammo-management-console&metric=security_rating)](https://sonarcloud.io/dashboard/index/com.jukusoft%3Ammo-management-console) 
 
 [![Sonarcloud](https://sonarcloud.io/api/project_badges/quality_gate?project=com.jukusoft%3Ammo-management-console)](https://sonarcloud.io/dashboard?id=com.jukusoft%3Ammo-management-console)
+
+## Docker Build
+
+```shell script
+docker build -t groupID/artefactID .
+```
