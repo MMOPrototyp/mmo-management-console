@@ -33,21 +33,6 @@ public class RoleEntity extends AbstractEntity {
     @ManyToMany(/*mappedBy = "id", */cascade = {}, fetch = FetchType.LAZY)
     private List<UserEntity> members = new ArrayList<>();
 
-    //@ManyToMany(fetch = FetchType.LAZY)
-    //@ElementCollection(/* targetClass=String.class,  */fetch = FetchType.LAZY)
-    /*@JoinTable(name = "role_permissions",
-            joinColumns = {
-                    @JoinColumn(name = "role_id", referencedColumnName = "id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "permission_id", referencedColumnName = "id")
-            },
-            uniqueConstraints = {
-                    @UniqueConstraint(columnNames = {})
-            }
-            )
-    @MapKeyColumn(name = "token")
-    @Column(name = "value")*/
     @OneToMany(mappedBy = "roleID", orphanRemoval = true, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<RolePermissionEntity> permissions;
 
