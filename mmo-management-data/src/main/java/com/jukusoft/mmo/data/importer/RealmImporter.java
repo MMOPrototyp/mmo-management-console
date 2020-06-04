@@ -71,6 +71,7 @@ public class RealmImporter implements InitializingBean {
                 realm = new RealmEntity(name, title);
             }
 
+            //set required permission
             realm.setRequiredPermission(requiredPermission);
 
             //find map
