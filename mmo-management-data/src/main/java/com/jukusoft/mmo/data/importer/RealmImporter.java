@@ -53,6 +53,7 @@ public class RealmImporter implements InitializingBean {
 
             String name = json.getString("name");
             String title = json.getString("title");
+            String requiredPermission = json.getString("requiredPermission");
 
             JSONObject startPosJSON = json.getJSONObject("startPosition");
             String startMap = startPosJSON.getString("mapUniqueName");
@@ -69,6 +70,8 @@ public class RealmImporter implements InitializingBean {
                 logger.info("create new realm: {}", name);
                 realm = new RealmEntity(name, title);
             }
+
+            realm.setRequiredPermission(requiredPermission);
 
             //find map
             Optional<MapEntity> mapEntityOptional = mapDAO.findByName(startMap);

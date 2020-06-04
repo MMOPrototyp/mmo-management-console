@@ -6,7 +6,8 @@
 			"mapUniqueName": "dev-room",
 			"x": 100,
 			"y": 100
-		}
+		},
+		"requiredPermission": "global.can.join.dev.room"
 	},
 	{
 		"name": "official-realm",
@@ -15,6 +16,7 @@
 			"mapUniqueName": "map1",
 			"x": 100,
 			"y": 100
-		}
+		},
+		"requiredPermission": "none"
 	}
 ]

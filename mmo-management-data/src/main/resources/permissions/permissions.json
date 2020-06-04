@@ -10,7 +10,7 @@
 		"type": "global"
 	},
 	{
-		"token": "global.can.access.dev.room",
+		"token": "global.can.join.dev.room",
 		"title": "Can join into dev room",
 		"type": "global"
 	}

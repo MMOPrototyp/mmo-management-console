@@ -30,10 +30,16 @@ public class RealmEntity extends AbstractEntity {
     @Embedded
     private StartPosition startPosition;
 
+    @Size(min = 2, max = 45)
+    @Column(name = "requiredPermission", unique = false, nullable = false, updatable = true)
+    @NotEmpty(message = "requiredPermission is required")
+    private String requiredPermission;
+
     public RealmEntity(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name, @Size(min = 2, max = 45) @NotEmpty(message = "title is required") String title) {
         this.name = name;
         this.title = title;
         this.startPosition = new StartPosition();
+        this.requiredPermission = "none";
     }
 
     protected RealmEntity() {
@@ -46,6 +52,14 @@ public class RealmEntity extends AbstractEntity {
 
     public void setStartPosition(StartPosition startPosition) {
         this.startPosition = startPosition;
+    }
+
+    public String getRequiredPermission() {
+        return requiredPermission;
+    }
+
+    public void setRequiredPermission(String requiredPermission) {
+        this.requiredPermission = requiredPermission;
     }
 
 }
