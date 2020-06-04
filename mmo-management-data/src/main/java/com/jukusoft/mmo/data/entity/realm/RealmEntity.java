@@ -22,8 +22,14 @@ public class RealmEntity extends AbstractEntity {
     @NotEmpty(message = "name is required")
     private String name;
 
-    public RealmEntity(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name) {
+    @Size(min = 2, max = 45)
+    @Column(name = "title", unique = false, nullable = false, updatable = true)
+    @NotEmpty(message = "title is required")
+    private String title;
+
+    public RealmEntity(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name, @Size(min = 2, max = 45) @NotEmpty(message = "title is required") String title) {
         this.name = name;
+        this.title = title;
     }
 
     public RealmEntity() {
