@@ -1,5 +1,6 @@
 package com.jukusoft.mmo.data.entity.map;
 
+import com.jukusoft.mmo.data.entity.AbstractEntity;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Cacheable;
@@ -20,7 +21,7 @@ import javax.validation.constraints.Size;
 })
 @Cacheable//use second level cache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ZoneEntity {
+public class ZoneEntity extends AbstractEntity {
 
     @Size(min = 2, max = 45)
     @Column(name = "name", unique = true, nullable = false, updatable = true)
