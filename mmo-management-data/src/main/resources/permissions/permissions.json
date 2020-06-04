@@ -8,5 +8,10 @@
 		"token": "global.can.login",
 		"title": "Can login",
 		"type": "global"
+	},
+	{
+		"token": "global.can.access.dev.room",
+		"title": "Can join into dev room",
+		"type": "global"
 	}
 ]
