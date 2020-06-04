@@ -13,5 +13,10 @@
 		"title": "Should the tutorial be enabled or skipped?",
 		"key": "tutorial.enabled",
 		"value": "true"
+	},
+	{
+		"title": "Debug Mode",
+		"key": "debug.mode.enabled",
+		"value": "true"
 	}
 ]
