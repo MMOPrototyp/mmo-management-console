@@ -24,7 +24,7 @@ public class RoleEntity extends AbstractEntity {
     @Column(name = "name", nullable = false, updatable = true, unique = true)
     private String name;
 
-    @Size(min = 2, max = 255)
+    @Size(min = 2, max = 90)
     @Column(name = "title", nullable = false, updatable = true)
     private String title;
 
