@@ -42,6 +42,12 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-auth</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Java JWT for REST authentification -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
