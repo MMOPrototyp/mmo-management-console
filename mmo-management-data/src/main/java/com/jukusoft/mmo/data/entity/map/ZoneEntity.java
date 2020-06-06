@@ -24,8 +24,20 @@ import javax.validation.constraints.Size;
 public class ZoneEntity extends AbstractEntity {
 
     @Size(min = 2, max = 45)
-    @Column(name = "name", unique = true, nullable = false, updatable = true)
+    @Column(name = "name", unique = true, nullable = false, updatable = false)
     @NotEmpty(message = "name is required")
     private String name;
+
+    public ZoneEntity(@Size(min = 2, max = 45) @NotEmpty(message = "name is required") String name) {
+        this.name = name;
+    }
+
+    public ZoneEntity() {
+        //
+    }
+
+    public String getName() {
+        return name;
+    }
 
 }
