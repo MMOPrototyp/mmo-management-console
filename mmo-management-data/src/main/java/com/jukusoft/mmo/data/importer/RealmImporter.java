@@ -24,6 +24,7 @@ import java.util.Optional;
 
 @Configuration
 @Profile("default")
+@DependsOn({"map_import"})
 public class RealmImporter implements InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(RealmImporter.class);
