@@ -11,5 +11,25 @@
 
     <artifactId>mmo-management-rest</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>mmo-management-service</artifactId>
+            <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.jukusoft</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
 
 </project>
