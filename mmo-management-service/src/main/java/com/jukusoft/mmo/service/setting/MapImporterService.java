@@ -1,7 +1,9 @@
 package com.jukusoft.mmo.service.setting;
 
 import com.jukusoft.mmo.core.utils.FileUtils;
+import com.jukusoft.mmo.data.dao.RegionDAO;
 import com.jukusoft.mmo.data.dao.ZoneDAO;
+import com.jukusoft.mmo.data.entity.map.RegionEntity;
 import com.jukusoft.mmo.data.entity.map.ZoneEntity;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -16,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 @Service
 public class MapImporterService {
@@ -24,6 +28,9 @@ public class MapImporterService {
 
     @Autowired
     private ZoneDAO zoneDAO;
+
+    @Autowired
+    private RegionDAO regionDAO;
 
     @Transactional
     public void importDir(File dir) throws IOException {
@@ -66,9 +73,50 @@ public class MapImporterService {
 
         ZoneEntity zone = createAndGetZone(name);
 
-        //TODO: import regions
+        //import regions
+        try {
+            listDir(zoneDir, dir -> importRegion(zone, dir));
+        } catch (IOException e) {
+            logger.warn("IOException while list regions in zone: " + zoneDir.getAbsolutePath(), e);
+        }
     }
 
+    private void listDir(File dir, Consumer<File> consumer) throws IOException {
+        Files.list(dir.toPath())
+                .map(path -> path.toFile())
+                .filter(file -> file.isDirectory())
+                .filter(file -> !file.getName().contains("."))
+                .forEach(consumer::accept);
+    }
+
+    public void importRegion(ZoneEntity zone, File regionDir) {
+        Objects.requireNonNull(regionDir);
+
+        if (!regionDir.exists()) {
+            throw new IllegalStateException("region directory does not exists: " + regionDir.getAbsolutePath());
+        }
+
+        if (!regionDir.isDirectory()) {
+            throw new IllegalStateException("path is not a directory: " + regionDir.getAbsolutePath());
+        }
+
+        File jsonFile = new File(regionDir, "region.json");
+        String content = "";
+
+        try {
+            content = FileUtils.readFile(jsonFile.getAbsolutePath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            logger.warn("Cannot read region.json: " + jsonFile.getAbsolutePath(), e);
+            return;
+        }
+
+        JSONObject json = new JSONObject(content);
+        String name = json.getString("name");
+
+        RegionEntity region = createAndGetRegion(zone, name);
+    }
+
+    @Transactional
     private ZoneEntity createAndGetZone(String uniqueName) {
         Optional<ZoneEntity> zoneEntityOptional = zoneDAO.findByName(uniqueName);
         ZoneEntity zone = null;
@@ -85,6 +133,25 @@ public class MapImporterService {
         }
 
         return zone;
+    }
+
+    @Transactional
+    private RegionEntity createAndGetRegion(ZoneEntity zone, String uniqueName) {
+        Optional<RegionEntity> regionEntityOptional = regionDAO.findByName(uniqueName);
+        RegionEntity region = null;
+
+        if (!regionEntityOptional.isPresent()) {
+            //create a new zone
+            logger.info("create new region '{}'", uniqueName);
+
+            region = new RegionEntity(zone, uniqueName);
+            region = regionDAO.save(region);
+        } else {
+            //zone already exists
+            region = regionEntityOptional.get();
+        }
+
+        return region;
     }
 
 }
