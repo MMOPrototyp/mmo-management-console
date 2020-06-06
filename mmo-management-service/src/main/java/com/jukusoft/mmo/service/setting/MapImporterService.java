@@ -153,7 +153,7 @@ public class MapImporterService {
         String name = json.getString("name");
 
         try {
-            MapEntity map = createAndGetMap(region, name, FileUtils.getRelativeFile(mapDir, new File("./data/zones")).getPath());
+            MapEntity map = createAndGetMap(region, name, FileUtils.getRelativeFile(mapDir, new File("./data/zones")).getPath().replace("\\", "/"));
         } catch (IOException e) {
             logger.warn("IOException while creating map: ", e);
         }
