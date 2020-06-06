@@ -1,8 +1,10 @@
 package com.jukusoft.mmo.service.setting;
 
 import com.jukusoft.mmo.core.utils.FileUtils;
+import com.jukusoft.mmo.data.dao.MapDAO;
 import com.jukusoft.mmo.data.dao.RegionDAO;
 import com.jukusoft.mmo.data.dao.ZoneDAO;
+import com.jukusoft.mmo.data.entity.map.MapEntity;
 import com.jukusoft.mmo.data.entity.map.RegionEntity;
 import com.jukusoft.mmo.data.entity.map.ZoneEntity;
 import org.json.JSONObject;
@@ -31,6 +33,9 @@ public class MapImporterService {
 
     @Autowired
     private RegionDAO regionDAO;
+
+    @Autowired
+    private MapDAO mapDAO;
 
     @Transactional
     public void importDir(File dir) throws IOException {
@@ -115,7 +120,45 @@ public class MapImporterService {
 
         RegionEntity region = createAndGetRegion(zone, name);
 
-        //TODO: import maps in region
+        //import maps
+        try {
+            listDir(regionDir, dir -> importMap(region, dir));
+        } catch (IOException e) {
+            logger.warn("IOException while list maps in region: " + regionDir.getAbsolutePath(), e);
+        }
+    }
+
+    public void importMap(RegionEntity region, File mapDir) {
+        Objects.requireNonNull(mapDir);
+
+        if (!mapDir.exists()) {
+            throw new IllegalStateException("map directory does not exists: " + mapDir.getAbsolutePath());
+        }
+
+        if (!mapDir.isDirectory()) {
+            throw new IllegalStateException("path is not a directory: " + mapDir.getAbsolutePath());
+        }
+
+        File jsonFile = new File(mapDir, "map.json");
+        String content = "";
+
+        try {
+            content = FileUtils.readFile(jsonFile.getAbsolutePath(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            logger.warn("Cannot read map.json: " + jsonFile.getAbsolutePath(), e);
+            return;
+        }
+
+        JSONObject json = new JSONObject(content);
+        String name = json.getString("name");
+
+        try {
+            MapEntity map = createAndGetMap(region, name, FileUtils.getRelativeFile(mapDir, new File("./data/zones")).getPath());
+        } catch (IOException e) {
+            logger.warn("IOException while creating map: ", e);
+        }
+
+        //TODO: import tiled maps
     }
 
     @Transactional
@@ -143,17 +186,36 @@ public class MapImporterService {
         RegionEntity region = null;
 
         if (!regionEntityOptional.isPresent()) {
-            //create a new zone
+            //create a new region
             logger.info("create new region '{}'", uniqueName);
 
             region = new RegionEntity(zone, uniqueName);
             region = regionDAO.save(region);
         } else {
-            //zone already exists
+            //region already exists
             region = regionEntityOptional.get();
         }
 
         return region;
+    }
+
+    @Transactional
+    private MapEntity createAndGetMap(RegionEntity region, String uniqueName, String relPath) {
+        Optional<MapEntity> mapEntityOptional = mapDAO.findByName(uniqueName);
+        MapEntity map = null;
+
+        if (!mapEntityOptional.isPresent()) {
+            //create a new map
+            logger.info("create new map '{}'", uniqueName);
+
+            map = new MapEntity(region, uniqueName, relPath);
+            map = mapDAO.save(map);
+        } else {
+            //map already exists
+            map = mapEntityOptional.get();
+        }
+
+        return map;
     }
 
 }
