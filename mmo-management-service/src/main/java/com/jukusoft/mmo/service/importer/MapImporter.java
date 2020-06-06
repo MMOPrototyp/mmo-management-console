@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 
+import java.io.File;
+
 /**
  * this importer imports all zones, regions and maps
  */
@@ -32,6 +34,8 @@ public class MapImporter implements InitializingBean {
         }
 
         logger.info("import maps now");
+
+        mapImporterService.importDir(new File("./data/zones"));
     }
 
 }
