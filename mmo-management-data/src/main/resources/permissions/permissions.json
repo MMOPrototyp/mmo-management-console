@@ -13,5 +13,20 @@
 		"token": "global.can.join.dev.room",
 		"title": "Can join into dev room",
 		"type": "global"
+	},
+	{
+		"token": "global.can.see.statistics",
+		"title": "Can see statistics",
+		"type": "global"
+	},
+	{
+		"token": "global.can.see.api.version",
+		"title": "Can see api version",
+		"type": "global"
+	},
+	{
+		"token": "global.can.see.all.users",
+		"title": "Can see all users",
+		"type": "global"
 	}
 ]

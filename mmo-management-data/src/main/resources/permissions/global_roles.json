@@ -5,7 +5,10 @@
 		"default_permissions": [
 			"global.super.admin",
 			"global.can.login",
-			"global.can.join.dev.room"
+			"global.can.join.dev.room",
+			"global.can.see.statistics",
+			"global.can.see.api.version",
+			"global.can.see.all.users"
 		]
 	},
 	{
