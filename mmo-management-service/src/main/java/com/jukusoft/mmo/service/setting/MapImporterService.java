@@ -66,7 +66,7 @@ public class MapImporterService {
 
         ZoneEntity zone = createAndGetZone(name);
 
-        //TODO: add code here
+        //TODO: import regions
     }
 
     private ZoneEntity createAndGetZone(String uniqueName) {
