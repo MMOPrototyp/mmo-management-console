@@ -114,6 +114,8 @@ public class MapImporterService {
         String name = json.getString("name");
 
         RegionEntity region = createAndGetRegion(zone, name);
+
+        //TODO: import maps in region
     }
 
     @Transactional
