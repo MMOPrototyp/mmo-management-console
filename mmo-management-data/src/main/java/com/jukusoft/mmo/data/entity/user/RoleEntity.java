@@ -83,7 +83,8 @@ public class RoleEntity extends AbstractEntity {
     }
 
     public void removePermission(PermissionEntity permissionEntity) {
-        this.permissions.remove(permissionEntity);
+        RolePermissionEntity rolePermission = new RolePermissionEntity(this, permissionEntity);
+        this.permissions.remove(rolePermission);
     }
 
 }

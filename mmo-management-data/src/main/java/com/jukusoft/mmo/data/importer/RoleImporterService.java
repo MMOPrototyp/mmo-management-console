@@ -52,22 +52,19 @@ public class RoleImporterService {
 
             if (roleDAO.existsByName(name)) {
                 logger.debug("role '{}' already exists");
+
+                RoleEntity role = roleDAO.findByName(name).orElseThrow();
+
+                role = addDefaultPermissions(json, role);
+                roleDAO.save(role);
             } else {
                 logger.info("create role '{}'", name);
 
                 //create new global role
                 RoleEntity role = new RoleEntity(name, title);
+                role = roleDAO.save(role);
 
-                //add default permissions
-                JSONArray permissions = json.getJSONArray("default_permissions");
-
-                for (int k = 0; k < permissions.length(); k++) {
-                    String permission = permissions.getString(k);
-                    PermissionEntity permissionEntity = permissionDAO.findById(permission).orElseThrow(() -> new IllegalStateException("permission does not exists: " + permission));
-
-                    role.addPermission(permissionEntity);
-                }
-
+                role = addDefaultPermissions(json, role);
                 roleDAO.save(role);
             }
         }
@@ -89,6 +86,20 @@ public class RoleImporterService {
         }
 
         logger.info("{} roles found in database", roleDAO.count());
+    }
+
+    private RoleEntity addDefaultPermissions(JSONObject json, RoleEntity role) {
+        //add default permissions
+        JSONArray permissions = json.getJSONArray("default_permissions");
+
+        for (int k = 0; k < permissions.length(); k++) {
+            String permission = permissions.getString(k);
+            PermissionEntity permissionEntity = permissionDAO.findById(permission).orElseThrow(() -> new IllegalStateException("permission does not exists: " + permission));
+
+            role.addPermission(permissionEntity);
+        }
+
+        return role;
     }
 
 }
