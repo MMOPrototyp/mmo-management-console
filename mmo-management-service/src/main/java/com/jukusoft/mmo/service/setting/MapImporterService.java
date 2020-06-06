@@ -22,6 +22,7 @@ public class MapImporterService {
         Files.list(dir.toPath())
                 .map(path -> path.toFile())
                 .filter(file -> file.isDirectory())
+                .filter(file -> !file.getName().contains("."))
                 .forEach(zoneDir -> importZone(zoneDir));
     }
 
@@ -35,6 +36,8 @@ public class MapImporterService {
         if (!zoneDir.isDirectory()) {
             throw new IllegalStateException("path is not a directory: " + zoneDir.getAbsolutePath());
         }
+
+        File jsonFile = new File(zoneDir, "zone.json");
 
         //TODO: add code here
     }
