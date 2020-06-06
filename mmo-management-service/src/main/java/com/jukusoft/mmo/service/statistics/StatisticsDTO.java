@@ -7,6 +7,11 @@ public class StatisticsDTO {
     protected long regionCount;
     protected long mapCount;
 
+    protected long proxyServerOnlineCount;
+    protected long minProxyServerOnlineCountAlertLevel;
+    protected long gameServerOnlineCount;
+    protected long minGameServerOnlineCountAlertLevel;
+
     public StatisticsDTO(long userCount, long zoneCount, long regionCount, long mapCount) {
         this.userCount = userCount;
         this.zoneCount = zoneCount;
@@ -29,5 +34,21 @@ public class StatisticsDTO {
     public long getMapCount() {
         return mapCount;
     }
-    
+
+    public long getProxyServerOnlineCount() {
+        return proxyServerOnlineCount;
+    }
+
+    public long getMinProxyServerOnlineCountAlertLevel() {
+        return minProxyServerOnlineCountAlertLevel;
+    }
+
+    public long getGameServerOnlineCount() {
+        return gameServerOnlineCount;
+    }
+
+    public long getMinGameServerOnlineCountAlertLevel() {
+        return minGameServerOnlineCountAlertLevel;
+    }
+
 }
