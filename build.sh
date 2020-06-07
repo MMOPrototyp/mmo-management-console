@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd /opt/mmo-management-console/mmo-management-console
+
 # Git Pull
 git fetch --all
 git reset --hard origin/master
