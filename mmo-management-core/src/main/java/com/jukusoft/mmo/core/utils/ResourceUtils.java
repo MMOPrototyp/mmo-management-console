@@ -1,11 +1,13 @@
 package com.jukusoft.mmo.core.utils;
 
+import com.google.common.io.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -95,7 +97,11 @@ public class ResourceUtils {
      * @throws IOException if read fails for any reason
      */
     public static String getResourceFileAsString(String fileName) throws IOException {
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        URL url = loader.getResource(fileName);
+        return Resources.toString(url, StandardCharsets.UTF_8);
+
+        /*ClassLoader classLoader = ClassLoader.getSystemClassLoader();
 
         try (InputStream is = classLoader.getResourceAsStream(fileName)) {
             if (is == null) return null;
@@ -103,7 +109,7 @@ public class ResourceUtils {
             try (InputStreamReader isr = new InputStreamReader(is); BufferedReader reader = new BufferedReader(isr)) {
                 return reader.lines().collect(Collectors.joining(System.lineSeparator()));
             }
-        }
+        }*/
     }
 
 }
