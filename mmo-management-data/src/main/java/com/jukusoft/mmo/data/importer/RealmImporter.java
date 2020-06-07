@@ -47,6 +47,8 @@ public class RealmImporter implements InitializingBean {
         String jsonString = ResourceUtils.getResourceFileAsString("realms/realms.json");
         Objects.requireNonNull(jsonString);
 
+        logger.info("json content: {}", jsonString);
+
         JSONArray jsonArray = new JSONArray(jsonString);
 
         for (int i = 0; i < jsonArray.length(); i++) {
