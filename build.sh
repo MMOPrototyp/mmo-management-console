@@ -23,4 +23,6 @@ cp -rf mmo-management-main/target/mmo-management-main-1.0.0-SNAPSHOT.jar ../bin/
 cp -rf ../config/application.properties ../bin/application.properties
 
 echo "Start new screen session"
-../bin/startScreen.sh
+
+cd /opt/mmo-management-console/mmo-management-console/bin
+./startScreen.sh
