@@ -18,7 +18,7 @@ import java.io.File;
  */
 @Configuration
 @Profile("default")
-@DependsOn({"permission_import", "user_import"})
+//@DependsOn({"permission_import", "user_import"})
 public class MapImporter implements InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(MapImporter.class);
