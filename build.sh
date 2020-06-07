@@ -24,5 +24,5 @@ cp -rf ../config/application.properties ../bin/application.properties
 
 echo "Start new screen session"
 
-cd /opt/mmo-management-console/mmo-management-console/bin
+cd /opt/mmo-management-console/bin
 ./startScreen.sh
