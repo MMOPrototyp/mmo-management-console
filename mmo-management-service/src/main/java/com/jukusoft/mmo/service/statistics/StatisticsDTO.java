@@ -12,6 +12,10 @@ public class StatisticsDTO {
     protected long gameServerOnlineCount;
     protected long minGameServerOnlineCountAlertLevel;
 
+    //hdd space
+    protected float freeSpace;
+    protected long minFreeSpaceInMB;
+
     public StatisticsDTO(long userCount, long zoneCount, long regionCount, long mapCount) {
         this.userCount = userCount;
         this.zoneCount = zoneCount;
