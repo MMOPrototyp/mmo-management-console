@@ -9,6 +9,8 @@ git pull
 
 chmod 755 build.sh
 
+../bin/stopScreen.sh
+
 mvn clean install
 
 cp -rf mmo-management-main/target/mmo-management-main-1.0.0-SNAPSHOT.jar ../bin/app.jar
@@ -17,3 +19,4 @@ cp -rf mmo-management-main/target/mmo-management-main-1.0.0-SNAPSHOT.jar ../bin/
 # Copy configuration
 cp -rf ../config/application.properties ../bin/application.properties
 
+../bin/startScreen.sh
