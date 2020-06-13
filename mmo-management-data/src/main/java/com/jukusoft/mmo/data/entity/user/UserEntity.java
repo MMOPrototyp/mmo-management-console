@@ -38,6 +38,11 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "salt", unique = false, nullable = true, updatable = true)
     private String salt;
 
+    @Size(min = 2, max = 45)
+    @Column(name = "source", unique = false, nullable = false, updatable = true)
+    @NotEmpty(message = "source is required")
+    private String source;
+
     @JsonIgnore
     @OneToOne(mappedBy = "user", orphanRemoval = true, optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private UserPreferencesEntity userPreferences;
@@ -55,6 +60,7 @@ public class UserEntity extends AbstractEntity {
 
     public UserEntity(@Size(min = 2, max = 45) @NotEmpty(message = "username is required") String username) {
         this.username = username;
+        this.source = "local";
     }
 
     private UserEntity() {
