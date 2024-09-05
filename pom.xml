@@ -35,7 +35,7 @@
 
         <org.json.version>20190722</org.json.version>
 
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>2.10.0</swagger.version>
 
         <!-- Java JWT for REST authentification -->
         <jjwt.version>0.9.1</jjwt.version>
